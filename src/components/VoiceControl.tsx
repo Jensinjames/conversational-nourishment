@@ -69,8 +69,8 @@ export const VoiceControl = () => {
       await conversation.startSession({
         agentId: "test-agent",
         onMessage: (message) => {
-          if (message.text) {
-            handleVoiceCommand(message.text);
+          if (message.message) { // Changed from message.text to message.message
+            handleVoiceCommand(message.message);
           }
         },
       });
