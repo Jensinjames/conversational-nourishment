@@ -2,7 +2,9 @@ import { useState } from "react";
 import { VoiceControl } from "@/components/VoiceControl";
 import { OrderSummary } from "@/components/OrderSummary";
 import { CustomerInfo } from "@/components/CustomerInfo";
-import { ChatInterface } from "@/components/ChatInterface";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
+import { MessageCircle } from "lucide-react";
 
 const Index = () => {
   const [orderDetails] = useState({
@@ -44,7 +46,14 @@ const Index = () => {
               total={orderDetails.total}
               onGenerateReceipt={handleGenerateReceipt}
             />
-            <ChatInterface />
+            <div className="flex justify-center">
+              <Link to="/chat">
+                <Button className="w-full" size="lg">
+                  <MessageCircle className="mr-2" />
+                  Open Chat Support
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
