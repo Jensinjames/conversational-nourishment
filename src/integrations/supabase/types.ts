@@ -108,6 +108,27 @@ export type Database = {
         }
         Relationships: []
       }
+      menu_cache: {
+        Row: {
+          id: string
+          last_updated: string | null
+          menu_data: Json
+          metadata: Json | null
+        }
+        Insert: {
+          id?: string
+          last_updated?: string | null
+          menu_data: Json
+          metadata?: Json | null
+        }
+        Update: {
+          id?: string
+          last_updated?: string | null
+          menu_data?: Json
+          metadata?: Json | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           bio: string | null
@@ -129,6 +150,42 @@ export type Database = {
           display_name?: string | null
           id?: never
           user_id?: string
+        }
+        Relationships: []
+      }
+      toast_configuration: {
+        Row: {
+          access_token: string | null
+          client_id: string
+          client_secret: string
+          created_at: string | null
+          id: string
+          refresh_token: string | null
+          restaurant_id: string
+          token_expires_at: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          access_token?: string | null
+          client_id: string
+          client_secret: string
+          created_at?: string | null
+          id?: string
+          refresh_token?: string | null
+          restaurant_id: string
+          token_expires_at?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          access_token?: string | null
+          client_id?: string
+          client_secret?: string
+          created_at?: string | null
+          id?: string
+          refresh_token?: string | null
+          restaurant_id?: string
+          token_expires_at?: string | null
+          updated_at?: string | null
         }
         Relationships: []
       }
