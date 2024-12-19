@@ -39,6 +39,8 @@ export const VoiceControl = () => {
   }, [isListening, conversation]);
 
   const handleVoiceCommand = async (transcript: string) => {
+    console.log("Received transcript:", transcript);
+    
     // Simple mock order processing logic
     const lowerTranscript = transcript.toLowerCase();
     const menuItems = TEST_MENU.categories.flatMap(cat => cat.items);
@@ -63,16 +65,35 @@ export const VoiceControl = () => {
 
   const startListening = async () => {
     try {
-      await navigator.mediaDevices.getUserMedia({ audio: true });
+      console.log("Starting microphone access request...");
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      console.log("Microphone access granted:", stream.active);
       
-      // Using test agent ID - replace with actual Toast integration later
+      console.log("Starting ElevenLabs session...");
       await conversation.startSession({
         agentId: "test-agent",
         onMessage: (message) => {
-          if (message.message) { // Changed from message.text to message.message
+          console.log("Received message from ElevenLabs:", message);
+          if (message.message) {
             handleVoiceCommand(message.message);
           }
         },
+        onError: (error) => {
+          console.error("ElevenLabs error:", error);
+          toast({
+            title: "Error",
+            description: "An error occurred with the voice service. Please try again.",
+            variant: "destructive",
+          });
+          setIsListening(false);
+        },
+        onConnect: () => {
+          console.log("Connected to ElevenLabs WebSocket");
+        },
+        onDisconnect: () => {
+          console.log("Disconnected from ElevenLabs WebSocket");
+          setIsListening(false);
+        }
       });
       
       setIsListening(true);
@@ -91,6 +112,7 @@ export const VoiceControl = () => {
   };
 
   const stopListening = async () => {
+    console.log("Stopping ElevenLabs session...");
     await conversation.endSession();
     setIsListening(false);
     toast({
