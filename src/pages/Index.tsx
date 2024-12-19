@@ -2,6 +2,7 @@ import { useState } from "react";
 import { VoiceControl } from "@/components/VoiceControl";
 import { OrderSummary } from "@/components/OrderSummary";
 import { CustomerInfo } from "@/components/CustomerInfo";
+import { ChatInterface } from "@/components/ChatInterface";
 
 const Index = () => {
   const [orderDetails] = useState({
@@ -16,7 +17,6 @@ const Index = () => {
   });
 
   const handleGenerateReceipt = async () => {
-    // Implementation for receipt generation will go here
     return new Promise((resolve) => setTimeout(resolve, 1000));
   };
 
@@ -37,12 +37,15 @@ const Index = () => {
             <VoiceControl />
             <CustomerInfo {...orderDetails.customer} />
           </div>
-          <OrderSummary
-            subtotal={orderDetails.subtotal}
-            tax={orderDetails.tax}
-            total={orderDetails.total}
-            onGenerateReceipt={handleGenerateReceipt}
-          />
+          <div className="space-y-8">
+            <OrderSummary
+              subtotal={orderDetails.subtotal}
+              tax={orderDetails.tax}
+              total={orderDetails.total}
+              onGenerateReceipt={handleGenerateReceipt}
+            />
+            <ChatInterface />
+          </div>
         </div>
       </div>
     </div>
