@@ -9,256 +9,119 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      Activity: {
+      order_items: {
         Row: {
-          Action: string
-          Details: Json
-          ID: string
-          Source: string
-          Status: string
-          Timestamp: string
-          User: string
-        }
-        Insert: {
-          Action: string
-          Details: Json
-          ID: string
-          Source: string
-          Status: string
-          Timestamp: string
-          User: string
-        }
-        Update: {
-          Action?: string
-          Details?: Json
-          ID?: string
-          Source?: string
-          Status?: string
-          Timestamp?: string
-          User?: string
-        }
-        Relationships: []
-      }
-      comments: {
-        Row: {
-          content: string
-          created_at: string
+          created_at: string | null
           id: string
-          user_id: string
+          name: string
+          notes: string | null
+          quantity: number
+          session_id: string
         }
         Insert: {
-          content: string
-          created_at?: string
+          created_at?: string | null
           id?: string
-          user_id: string
+          name: string
+          notes?: string | null
+          quantity: number
+          session_id: string
         }
         Update: {
-          content?: string
-          created_at?: string
+          created_at?: string | null
           id?: string
-          user_id?: string
+          name?: string
+          notes?: string | null
+          quantity?: number
+          session_id?: string
         }
-        Relationships: []
-      }
-      conversation_history: {
-        Row: {
-          agent_response: string
-          conversation_id: string
-          id: string
-          metadata: Json | null
-          timestamp: string | null
-          user_message: string
-        }
-        Insert: {
-          agent_response: string
-          conversation_id: string
-          id?: string
-          metadata?: Json | null
-          timestamp?: string | null
-          user_message: string
-        }
-        Update: {
-          agent_response?: string
-          conversation_id?: string
-          id?: string
-          metadata?: Json | null
-          timestamp?: string | null
-          user_message?: string
-        }
-        Relationships: []
-      }
-      conversational_history: {
-        Row: {
-          created_at: string
-          id: number
-          message: string
-          user_id: string
-        }
-        Insert: {
-          created_at?: string
-          id?: never
-          message: string
-          user_id: string
-        }
-        Update: {
-          created_at?: string
-          id?: never
-          message?: string
-          user_id?: string
-        }
-        Relationships: []
-      }
-      menu_cache: {
-        Row: {
-          id: string
-          last_updated: string | null
-          menu_data: Json
-          metadata: Json | null
-        }
-        Insert: {
-          id?: string
-          last_updated?: string | null
-          menu_data: Json
-          metadata?: Json | null
-        }
-        Update: {
-          id?: string
-          last_updated?: string | null
-          menu_data?: Json
-          metadata?: Json | null
-        }
-        Relationships: []
-      }
-      profiles: {
-        Row: {
-          bio: string | null
-          created_at: string
-          display_name: string | null
-          id: number
-          user_id: string
-        }
-        Insert: {
-          bio?: string | null
-          created_at?: string
-          display_name?: string | null
-          id?: never
-          user_id: string
-        }
-        Update: {
-          bio?: string | null
-          created_at?: string
-          display_name?: string | null
-          id?: never
-          user_id?: string
-        }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "order_items_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "useVoicesession"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       toast_configuration: {
         Row: {
-          access_token: string | null
-          client_id: string
-          client_secret: string
+          config_name: string
+          config_value: string
           created_at: string | null
-          id: string
-          refresh_token: string | null
-          restaurant_id: string
-          token_expires_at: string | null
+          id: number
+          order_ticket_items: unknown
           updated_at: string | null
         }
         Insert: {
-          access_token?: string | null
-          client_id: string
-          client_secret: string
+          config_name: string
+          config_value: string
           created_at?: string | null
-          id?: string
-          refresh_token?: string | null
-          restaurant_id: string
-          token_expires_at?: string | null
+          id?: never
+          order_ticket_items: unknown
           updated_at?: string | null
         }
         Update: {
-          access_token?: string | null
-          client_id?: string
-          client_secret?: string
+          config_name?: string
+          config_value?: string
           created_at?: string | null
-          id?: string
-          refresh_token?: string | null
-          restaurant_id?: string
-          token_expires_at?: string | null
+          id?: never
+          order_ticket_items?: unknown
           updated_at?: string | null
         }
         Relationships: []
       }
-      verification_codes: {
+      useVoicesession: {
         Row: {
-          attempts: number | null
-          created_at: string | null
-          expires_at: string | null
+          agent_id: number
+          convoai_id: string | null
+          created_at: number | null
+          guid: string | null
           id: string
-          phone_number: string
-          verification_code: string
-          verified: boolean | null
+          uvs_id: string | null
+          voice_streaming_panel: string
         }
         Insert: {
-          attempts?: number | null
-          created_at?: string | null
-          expires_at?: string | null
-          id?: string
-          phone_number: string
-          verification_code: string
-          verified?: boolean | null
+          agent_id: number
+          convoai_id?: string | null
+          created_at?: number | null
+          guid?: string | null
+          id: string
+          uvs_id?: string | null
+          voice_streaming_panel?: string
         }
         Update: {
-          attempts?: number | null
-          created_at?: string | null
-          expires_at?: string | null
+          agent_id?: number
+          convoai_id?: string | null
+          created_at?: number | null
+          guid?: string | null
           id?: string
-          phone_number?: string
-          verification_code?: string
-          verified?: boolean | null
+          uvs_id?: string | null
+          voice_streaming_panel?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "useVoicesession_guid_fkey"
+            columns: ["guid"]
+            isOneToOne: false
+            referencedRelation: "useVoicesession"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      count_total_users: {
-        Args: Record<PropertyKey, never>
-        Returns: number
-      }
-      get_active_and_max_connections: {
-        Args: Record<PropertyKey, never>
-        Returns: {
-          active_connections: number
-          max_connections: number
-        }[]
-      }
-      get_user_profile: {
+      get_session_orders: {
         Args: {
-          user_id: number
+          p_session_id: string
         }
         Returns: {
-          id: number
-          username: string
-          email: string
-          created_at: string
+          order_details: Json
+          toast_config: Json
         }[]
-      }
-      sms_authenticate_user: {
-        Args: {
-          phone_number: string
-          shortcode: string
-        }
-        Returns: string
-      }
-      update_user_email: {
-        Args: {
-          user_id: number
-          new_email: string
-        }
-        Returns: undefined
       }
     }
     Enums: {
