@@ -1,9 +1,11 @@
+"use client"
+
 import { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
-export default function VoiceSimulator() {
+const VoiceSimulator: React.FC = () => {
   const [input, setInput] = useState('')
   const [conversation, setConversation] = useState<string[]>([])
 
@@ -11,7 +13,6 @@ export default function VoiceSimulator() {
     e.preventDefault()
     setConversation([...conversation, `User: ${input}`])
     
-    // Simulate API call to voice agent
     const response = await fetch('/api/voice-agent', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -47,3 +48,4 @@ export default function VoiceSimulator() {
   )
 }
 
+export default VoiceSimulator

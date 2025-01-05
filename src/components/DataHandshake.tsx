@@ -1,8 +1,10 @@
+"use client"
+
 import { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
-export default function DataHandshake() {
+const DataHandshake: React.FC = () => {
   const [status, setStatus] = useState('Idle')
   const [log, setLog] = useState<string[]>([])
 
@@ -40,3 +42,4 @@ export default function DataHandshake() {
   )
 }
 
+export default DataHandshake

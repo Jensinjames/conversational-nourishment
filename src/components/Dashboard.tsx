@@ -1,6 +1,8 @@
+"use client"
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
-export default function Dashboard() {
+const Dashboard: React.FC = () => {
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
       <Card>
@@ -43,3 +45,4 @@ export default function Dashboard() {
   )
 }
 
+export default Dashboard

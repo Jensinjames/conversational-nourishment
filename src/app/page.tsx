@@ -1,7 +1,7 @@
-import Dashboard from './components/Dashboard'
-import VoiceSimulator from './components/VoiceSimulator'
-import OrderTracker from './components/OrderTracker'
-import DataHandshake from './components/DataHandshake'
+import Dashboard from '@/components/Dashboard'
+import VoiceSimulator from '@/components/VoiceSimulator'
+import OrderTracker from '@/components/OrderTracker'
+import DataHandshake from '@/components/DataHandshake'
 
 export default function Home() {
   return (
@@ -15,4 +15,3 @@ export default function Home() {
     </main>
   )
 }
-

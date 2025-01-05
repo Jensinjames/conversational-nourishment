@@ -9,7 +9,7 @@ type Order = {
   items: string[]
 }
 
-export default function OrderTracker() {
+const OrderTracker: React.FC = () => {
   const [orders, setOrders] = useState<Order[]>([])
 
   useEffect(() => {
@@ -20,7 +20,7 @@ export default function OrderTracker() {
     }
 
     fetchOrders()
-    const interval = setInterval(fetchOrders, 5000) // Refresh every 5 seconds
+    const interval = setInterval(fetchOrders, 5000)
 
     return () => clearInterval(interval)
   }, [])
@@ -45,3 +45,4 @@ export default function OrderTracker() {
   )
 }
 
+export default OrderTracker

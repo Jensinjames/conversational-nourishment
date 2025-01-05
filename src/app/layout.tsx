@@ -1,9 +1,10 @@
 import './globals.css'
 import { Inter } from 'next/font/google'
+import type { Metadata } from 'next'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Gerald's Donuts Voice Agent Sandbox",
   description: 'Sandbox environment for testing voice agent interactions',
 }
@@ -26,4 +27,3 @@ export default function RootLayout({
     </html>
   )
 }
-
